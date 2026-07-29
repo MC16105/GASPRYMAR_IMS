@@ -5,5 +5,4 @@ public enum RolNombre {
     GERENTE,
     PRODUCCION,
     VENTAS
-
 }
