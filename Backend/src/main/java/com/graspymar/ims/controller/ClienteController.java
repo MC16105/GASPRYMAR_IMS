@@ -9,7 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/clientes")
 @RequiredArgsConstructor
@@ -44,7 +43,6 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
-    /*@ResponseStatus(HttpStatus.NO_CONTENT)*/
     @PreAuthorize("hasRole('ADMIN')")
     public void eliminar(@PathVariable Long id) {
         clienteService.eliminar(id);
