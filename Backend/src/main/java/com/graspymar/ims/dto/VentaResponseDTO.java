@@ -1,8 +1,8 @@
 package com.graspymar.ims.dto;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,18 +11,18 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompraRequestDTO {
+public class VentaResponseDTO {
+    private Long id;
 
-    @NotNull
-    private Long proveedorId;
+    private String cliente;
 
-    @NotNull
     private LocalDate fecha;
 
     private String documentoFiscal;
 
+    private BigDecimal montoTotal;
+
     private String observaciones;
 
-    @NotEmpty
-    private List<DetalleCompraRequestDTO> detalles;
+    private List<DetalleVentaResponseDTO> detalles;
 }

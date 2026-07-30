@@ -1,6 +1,5 @@
 package com.graspymar.ims.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import java.math.BigDecimal;
 
@@ -9,14 +8,17 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalleCompraRequestDTO {
+public class DetalleVentaResponseDTO {
 
-    @NotNull
+    private Long id;
+
     private Long insumoId;
 
-    @NotNull
+    private String nombreInsumo;
+
     private Integer cantidad;
 
-    @NotNull
     private BigDecimal precioUnitario;
+
+    private BigDecimal subtotal;
 }

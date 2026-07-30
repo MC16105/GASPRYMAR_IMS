@@ -3,23 +3,23 @@ package com.graspymar.ims.entity;
 import com.graspymar.ims.base.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "compras")
+@Table(name = "ventas")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Compra extends BaseEntity {
-
+public class Venta extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="proveedor_id", nullable = false)
-    private Proveedor proveedor;
+    @JoinColumn(name="cliente_id", nullable = false)
+    private Cliente cliente;
 
     @Column(nullable = false)
     private LocalDate fecha;
@@ -34,11 +34,10 @@ public class Compra extends BaseEntity {
     private String observaciones;
 
     @OneToMany(
-            mappedBy="compra",
+            mappedBy="venta",
             cascade=CascadeType.ALL,
             orphanRemoval=true
     )
     @Builder.Default
-    private List<DetalleCompra> detalles=new ArrayList<>();
-
+    private List<DetalleVenta> detalles=new ArrayList<>();
 }

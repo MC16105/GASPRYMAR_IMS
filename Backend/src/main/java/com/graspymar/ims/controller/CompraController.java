@@ -18,40 +18,30 @@ public class CompraController {
     @PostMapping
     public CompraResponseDTO crear(
             @Valid @RequestBody CompraRequestDTO dto){
-
         return compraService.crear(dto);
-
     }
 
     @GetMapping
     public List<CompraResponseDTO> listar(){
-
         return compraService.listar();
-
     }
 
     @GetMapping("/{id}")
     public CompraResponseDTO buscarPorId(
             @PathVariable Long id){
-
         return compraService.buscarPorId(id);
-
     }
 
     @PutMapping("/{id}")
     public CompraResponseDTO actualizar(
             @PathVariable Long id,
             @RequestBody CompraRequestDTO dto){
-
         return compraService.actualizar(id,dto);
-
     }
 
     @DeleteMapping("/{id}")
     public void eliminar(
             @PathVariable Long id){
-
         compraService.eliminar(id);
-
     }
 }

@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalleCompraRequestDTO {
+public class DetalleVentaRequestDTO {
 
     @NotNull
     private Long insumoId;

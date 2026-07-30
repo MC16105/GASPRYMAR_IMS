@@ -11,10 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompraRequestDTO {
+public class VentaRequestDTO {
 
     @NotNull
-    private Long proveedorId;
+    private Long clienteId;
 
     @NotNull
     private LocalDate fecha;
@@ -24,5 +24,5 @@ public class CompraRequestDTO {
     private String observaciones;
 
     @NotEmpty
-    private List<DetalleCompraRequestDTO> detalles;
+    private List<DetalleVentaRequestDTO> detalles;
 }
