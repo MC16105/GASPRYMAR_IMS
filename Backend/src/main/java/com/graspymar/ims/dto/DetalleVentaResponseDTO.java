@@ -12,7 +12,7 @@ public class DetalleVentaResponseDTO {
 
     private Long id;
 
-    private Long insumoId;
+    private Long productoId;
 
     private String nombreInsumo;
 

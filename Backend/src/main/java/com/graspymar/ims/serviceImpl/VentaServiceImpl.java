@@ -6,10 +6,10 @@ import com.graspymar.ims.dto.VentaRequestDTO;
 import com.graspymar.ims.dto.VentaResponseDTO;
 import com.graspymar.ims.entity.Cliente;
 import com.graspymar.ims.entity.DetalleVenta;
-import com.graspymar.ims.entity.Insumo;
+import com.graspymar.ims.entity.Producto;
 import com.graspymar.ims.entity.Venta;
 import com.graspymar.ims.repository.ClienteRepository;
-import com.graspymar.ims.repository.InsumoRepository;
+import com.graspymar.ims.repository.ProductoRepository;
 import com.graspymar.ims.repository.VentaRepository;
 import com.graspymar.ims.service.VentaService;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,7 +24,7 @@ import java.util.List;
 public class VentaServiceImpl implements VentaService {
     private final VentaRepository ventaRepository;
     private final ClienteRepository clienteRepository;
-    private final InsumoRepository insumoRepository;
+    private final ProductoRepository productoRepository;
 
     @Override
     @Transactional
@@ -51,16 +51,16 @@ public class VentaServiceImpl implements VentaService {
 
         for (DetalleVentaRequestDTO detalleDTO : dto.getDetalles()) {
 
-            Insumo insumo = insumoRepository.findById(detalleDTO.getInsumoId())
+            Producto producto = productoRepository.findById(detalleDTO.getProductoId())
                     .orElseThrow(() ->
-                            new EntityNotFoundException("Insumo no encontrado."));
+                            new EntityNotFoundException("Producto no encontrado."));
 
             BigDecimal subtotal = detalleDTO.getPrecioUnitario()
                     .multiply(BigDecimal.valueOf(detalleDTO.getCantidad()));
 
             DetalleVenta detalle = DetalleVenta.builder()
                     .venta(venta)
-                    .insumo(insumo)
+                    .producto(producto)
                     .cantidad(detalleDTO.getCantidad())
                     .precioUnitario(detalleDTO.getPrecioUnitario())
                     .subtotal(subtotal)
@@ -71,15 +71,19 @@ public class VentaServiceImpl implements VentaService {
             total = total.add(subtotal);
 
             // Actualizar stock del insumo
-            if (insumo.getStockActual() < detalleDTO.getCantidad()) {
+            if (producto.getStockActual().compareTo(
+                    BigDecimal.valueOf(detalleDTO.getCantidad())
+            ) < 0) {
                 throw new IllegalArgumentException("Stock insuficiente.");
             }
 
-            insumo.setStockActual(
-                    insumo.getStockActual() - detalleDTO.getCantidad()
+            producto.setStockActual(
+                    producto.getStockActual().subtract(
+                            BigDecimal.valueOf(detalleDTO.getCantidad())
+                    )
             );
 
-            insumoRepository.save(insumo);
+            productoRepository.save(producto);
         }
 
        venta.setMontoTotal(total);
@@ -139,8 +143,8 @@ public class VentaServiceImpl implements VentaService {
 
                                 DetalleVentaResponseDTO.builder()
                                         .id(detalle.getId())
-                                        .insumoId(detalle.getInsumo().getId())
-                                        .nombreInsumo(detalle.getInsumo().getNombre())
+                                        .productoId(detalle.getProducto().getId())
+                                        .nombreInsumo(detalle.getProducto().getNombre())
                                         .cantidad(detalle.getCantidad())
                                         .precioUnitario(detalle.getPrecioUnitario())
                                         .subtotal(detalle.getSubtotal())

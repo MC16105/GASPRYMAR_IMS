@@ -22,8 +22,8 @@ public class DetalleVenta {
     private Venta venta;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="insumo_id")
-    private Insumo insumo;
+    @JoinColumn(name="producto_id")
+    private Producto producto;
 
     @Column(nullable=false)
     private Integer cantidad;

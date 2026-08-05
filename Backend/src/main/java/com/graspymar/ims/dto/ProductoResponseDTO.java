@@ -18,7 +18,7 @@ public class ProductoResponseDTO {
 
     private String unidadMedida;
 
-    private Double stockActual;
+    private BigDecimal stockActual;
 
     private BigDecimal precioVenta;
 }

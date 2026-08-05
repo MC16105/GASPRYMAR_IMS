@@ -1,0 +1,8 @@
+package com.graspymar.ims.enums;
+
+public enum TipoProduccion {
+    SIEMBRA,
+    COSECHA,
+    AJUSTE_POSITIVO,
+    AJUSTE_NEGATIVO
+}

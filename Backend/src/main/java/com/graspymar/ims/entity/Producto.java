@@ -27,7 +27,7 @@ public class Producto extends BaseEntity {
     private String unidadMedida;
 
     @Column(nullable = false)
-    private Double stockActual;
+    private BigDecimal stockActual;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precioVenta;

@@ -20,7 +20,7 @@ public class ProductoServiceImpl implements ProductoService {
     public ProductoResponseDTO crear(ProductoRequestDTO dto) {
         productoRepository.findByNombre(dto.getNombre())
                 .ifPresent(c -> {
-                    throw new IllegalArgumentException("Ya existe un Productoo con ese Nombre.");
+                    throw new IllegalArgumentException("Ya existe un Producto con ese Nombre.");
                 });
         Producto producto = Producto.builder()
                 .nombre(dto.getNombre())

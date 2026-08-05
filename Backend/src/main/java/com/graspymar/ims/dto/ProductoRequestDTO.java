@@ -23,7 +23,7 @@ public class ProductoRequestDTO {
     private String unidadMedida;
 
     @NotNull
-    private Double stockActual;
+    private BigDecimal stockActual;
 
     @NotNull
     private BigDecimal precioVenta;

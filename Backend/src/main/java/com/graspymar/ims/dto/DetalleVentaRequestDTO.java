@@ -12,11 +12,12 @@ import java.math.BigDecimal;
 public class DetalleVentaRequestDTO {
 
     @NotNull
-    private Long insumoId;
+    private Long productoId;
 
     @NotNull
     private Integer cantidad;
 
     @NotNull
     private BigDecimal precioUnitario;
+
 }
