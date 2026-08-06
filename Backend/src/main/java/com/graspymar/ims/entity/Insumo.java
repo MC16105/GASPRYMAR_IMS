@@ -1,6 +1,7 @@
 package com.graspymar.ims.entity;
 
 import com.graspymar.ims.base.BaseEntity;
+import com.graspymar.ims.enums.TipoMedida;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -20,7 +21,7 @@ public class Insumo extends BaseEntity {
     private String nombre;
 
     @Column(nullable = false, length = 20)
-    private String unidadMedida;
+    private TipoMedida unidadMedida;
 
     @Column(nullable = false)
     private Integer stockActual;

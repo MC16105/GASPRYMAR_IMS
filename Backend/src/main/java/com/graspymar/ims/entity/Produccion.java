@@ -1,6 +1,7 @@
 package com.graspymar.ims.entity;
 
 import com.graspymar.ims.base.BaseEntity;
+import com.graspymar.ims.enums.TipoMedida;
 import com.graspymar.ims.enums.TipoProduccion;
 import jakarta.persistence.*;
 import lombok.*;
@@ -32,7 +33,7 @@ public class Produccion extends BaseEntity {
     private BigDecimal cantidad;
 
     @Column(nullable = false, length = 20)
-    private String unidadMedida;
+    private TipoMedida unidadMedida;
 
     @Column(length = 250)
     private String observaciones;

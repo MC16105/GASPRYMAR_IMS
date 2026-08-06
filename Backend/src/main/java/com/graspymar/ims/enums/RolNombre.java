@@ -4,5 +4,6 @@ public enum RolNombre {
     ADMIN,
     GERENTE,
     PRODUCCION,
-    VENTAS
+    AUXILIAR,
+    INVITADO
 }

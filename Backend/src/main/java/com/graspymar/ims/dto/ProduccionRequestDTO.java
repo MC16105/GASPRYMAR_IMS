@@ -1,5 +1,6 @@
 package com.graspymar.ims.dto;
 
+import com.graspymar.ims.enums.TipoMedida;
 import com.graspymar.ims.enums.TipoProduccion;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class ProduccionRequestDTO {
     private BigDecimal cantidad;
 
     @NotBlank
-    private String unidadMedida;
+    private TipoMedida unidadMedida;
 
     private String observaciones;
 }
