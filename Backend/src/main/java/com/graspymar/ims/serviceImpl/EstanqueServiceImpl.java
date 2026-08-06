@@ -8,7 +8,6 @@ import com.graspymar.ims.service.EstanqueService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -83,5 +82,4 @@ public class EstanqueServiceImpl implements EstanqueService {
                 .estado(estanque.getEstado())
                 .build();
     }
-
 }

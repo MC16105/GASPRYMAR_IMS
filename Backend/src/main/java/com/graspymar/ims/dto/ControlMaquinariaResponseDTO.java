@@ -9,15 +9,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ControlEstanqueResponseDTO {
+public class ControlMaquinariaResponseDTO {
 
     private Long id;
 
-    private String estanque;
+    private String maquinaria;
 
     private LocalDate fecha;
 
-    private String observaciones;
+    private String horasUso;
 
-    private List<DetalleControlEstanqueResponseDTO> detalles;
+    private String operador;
+
+    private List<DetalleControlMaquinariaResponseDTO> detalles;
 }
