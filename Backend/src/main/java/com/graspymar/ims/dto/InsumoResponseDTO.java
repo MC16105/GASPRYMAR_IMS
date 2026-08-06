@@ -1,6 +1,5 @@
 package com.graspymar.ims.dto;
 
-import com.graspymar.ims.enums.TipoMedida;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -16,7 +15,7 @@ public class InsumoResponseDTO {
 
     private String nombre;
 
-    private TipoMedida unidadMedida;
+    private String unidadMedida;
 
     private Integer stockActual;
 

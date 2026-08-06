@@ -1,7 +1,6 @@
 package com.graspymar.ims.dto;
 
 
-import com.graspymar.ims.enums.TipoMedida;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -18,7 +17,7 @@ public class InsumoRequestDTO {
     private String nombre;
 
     @NotBlank
-    private TipoMedida unidadMedida;
+    private String unidadMedida;
 
     @NotNull
     private Integer stockActual;

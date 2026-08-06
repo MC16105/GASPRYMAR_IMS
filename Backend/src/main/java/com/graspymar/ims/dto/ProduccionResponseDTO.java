@@ -1,6 +1,5 @@
 package com.graspymar.ims.dto;
 
-import com.graspymar.ims.enums.TipoMedida;
 import com.graspymar.ims.enums.TipoProduccion;
 import lombok.*;
 
@@ -24,7 +23,7 @@ public class ProduccionResponseDTO {
 
     private BigDecimal cantidad;
 
-    private TipoMedida unidadMedida;
+    private String unidadMedida;
 
     private String observaciones;
 
