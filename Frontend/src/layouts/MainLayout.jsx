@@ -1,39 +1,30 @@
+import { Box } from "@mui/material";
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import { Outlet } from "react-router-dom";
-import { Box } from "@mui/material";
-const drawerWidth = 260;
+
 export default function MainLayout() {
     return (
-        <Box sx={{ display: "flex", height: "50vh", overflow: "hidden" }}>
-            {/* Sidebar lateral fijo */}
+        <Box
+            sx={{
+                minHeight: "100vh",
+                backgroundColor: "#f8fafc"
+            }}
+        >
+            <Navbar />
+            <Sidebar />
             <Box
-                component="nav"
-                sx={{ width: { sm: drawerWidth },
-                    flexShrink: { sm: 0 }  }}
+                component="main"
+                sx={{
+                    marginLeft: "220px",
+                    paddingTop: "90px",
+                    paddingLeft: 3,
+                    paddingRight: 3,
+                    paddingBottom: 3,
+                    minHeight: "100vh"
+                }}
             >
-                <Sidebar />
-            </Box>
-
-            {/* Contenedor principal */}
-            <Box
-
-            >
-                {/* Navbar superior */}
-                <Navbar />
-
-                {/* Área de contenido dinámico (Dashboard, etc.) */}
-                <Box
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        p: 3,
-                        overflowY: "auto",
-                        mt: "64px" // Altura estimada del Navbar para que no se traslape
-                    }}
-                >
-                    <Outlet />
-                </Box>
+                <Outlet />
             </Box>
         </Box>
     );
