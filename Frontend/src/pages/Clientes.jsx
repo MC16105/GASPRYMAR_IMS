@@ -10,10 +10,11 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { listarClientes, crearCliente, actualizarCliente, eliminarCliente } from "../services/clienteService";
 
 const logoGreen = "#1E5631";
-
 const initialState = {
     nombreRazonSocial: "",
     duiNit: "",
+    nrc:"",
+    direccion: "",
     telefono: "",
     correo: ""
 };
@@ -167,6 +168,8 @@ export default function Clientes() {
                                     <TableCell sx={{ fontWeight: 700, color: "#475569", py: 2 }}>ID</TableCell>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Nombre / Razón Social</TableCell>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569" }}>DUI / NIT</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>NRC</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Direccion</TableCell>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Teléfono</TableCell>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Correo</TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 700, color: "#475569" }}>Acciones</TableCell>
@@ -185,6 +188,8 @@ export default function Clientes() {
                                         <TableCell sx={{ color: "#64748b", fontWeight: 500 }}>#{cliente.id}</TableCell>
                                         <TableCell sx={{ color: "#1e293b", fontWeight: 600 }}>{cliente.nombreRazonSocial}</TableCell>
                                         <TableCell sx={{ color: "#334155" }}>{cliente.duiNit}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{cliente.nrc}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{cliente.direccion}</TableCell>
                                         <TableCell sx={{ color: "#334155" }}>{cliente.telefono || "N/D"}</TableCell>
                                         <TableCell sx={{ color: "#334155" }}>{cliente.correo || "N/D"}</TableCell>
                                         <TableCell align="center">
@@ -264,6 +269,22 @@ export default function Clientes() {
                                 required
                                 value={clienteActual.duiNit}
                                 onChange={(e) => setClienteActual({ ...clienteActual, duiNit: e.target.value })}
+                                sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
+                            />
+                            <TextField
+                                label="NRC"
+                                fullWidth
+                                required
+                                value={clienteActual.nrc}
+                                onChange={(e) => setClienteActual({ ...clienteActual, nrc: e.target.value })}
+                                sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
+                            />
+                            <TextField
+                                label="Direccion"
+                                fullWidth
+                                required
+                                value={clienteActual.direccion}
+                                onChange={(e) => setClienteActual({ ...clienteActual, direccion: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
