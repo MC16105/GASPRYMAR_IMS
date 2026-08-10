@@ -7,7 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { listarClientes, crearCliente, actualizarCliente, eliminarCliente } from "../services/clienteService";
+import { listarProveedor, crearProveedor, actualizarProveedor, eliminarProveedor } from "../services/proveedorService";
 
 const logoGreen = "#1E5631";
 const initialState = {
@@ -19,76 +19,76 @@ const initialState = {
     correo: ""
 };
 
-export default function Clientes() {
-    const [clientes, setClientes] = useState([]);
+export default function Proveedores() {
+    const [proveedores, setProveedores] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
 
     const [openModal, setOpenModal] = useState(false);
-    const [clienteActual, setClienteActual] = useState(initialState);
+    const [proveedorActual, setProveedorActual] = useState(initialState);
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-        cargarClientes();
+        cargarProveedores();
     }, []);
 
-    const cargarClientes = async () => {
+    const cargarProveedores = async () => {
         try {
             setCargando(true);
             setError("");
-            const respuesta = await listarClientes();
-            setClientes(respuesta.data);
+            const respuesta = await listarProveedor();
+            setProveedores(respuesta.data);
         } catch (err) {
             console.error(err);
-            setError("No se pudieron cargar los clientes.");
+            setError("No se pudieron cargar los proveedores.");
         } finally {
             setCargando(false);
         }
     };
 
     const handleAbrirCrear = () => {
-        setClienteActual(initialState);
+        setProveedorActual(initialState);
         setIsEditing(false);
         setOpenModal(true);
     };
 
-    const handleAbrirEditar = (cliente) => {
-        setClienteActual(cliente);
+    const handleAbrirEditar = (proveedor) => {
+        setProveedorActual(proveedor);
         setIsEditing(true);
         setOpenModal(true);
     };
 
     const handleCerrarModal = () => {
         setOpenModal(false);
-        setClienteActual(initialState);
+        setProveedorActual(initialState);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await actualizarCliente(clienteActual.id, clienteActual);
+                await actualizarProveedor(proveedorActual.id, proveedorActual);
             } else {
-                await crearCliente(clienteActual);
+                await crearProveedor(proveedorActual);
             }
-            await cargarClientes();
+            await cargarProveedores();
             handleCerrarModal();
         } catch (err) {
             console.error(err);
-            setError("No se pudo guardar el cliente.");
+            setError("No se pudo guardar el proveedor.");
         }
     };
 
     const handleEliminar = async (id) => {
-        if (!window.confirm("¿Deseas eliminar este cliente?")) {
+        if (!window.confirm("¿Deseas eliminar este Proveedor?")) {
             return;
         }
         try {
-            await eliminarCliente(id);
-            await cargarClientes();
+            await eliminarProveedor(id);
+            await cargarProveedores();
         } catch (err) {
             console.error(err);
-            setError("No se pudo eliminar el cliente.");
+            setError("No se pudo eliminar el proveedor.");
         }
     };
 
@@ -110,10 +110,10 @@ export default function Clientes() {
             >
                 <Box>
                     <Typography variant="h5" sx={{ fontWeight: 800, color: "#1e293b", letterSpacing: "-0.5px" }}>
-                        Directorio de Clientes
+                        Directorio de Proveedores
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#64748b", mt: 0.5 }}>
-                        Gestión y control de cartera de clientes de GRASPYMAR
+                        Gestión y control de cartera de proveedores de GRASPYMAR
                     </Typography>
                 </Box>
                 <Button
@@ -136,7 +136,7 @@ export default function Clientes() {
                         }
                     }}
                 >
-                    Nuevo Cliente
+                    Nuevo Proveedor
                 </Button>
             </Box>
 
@@ -176,27 +176,27 @@ export default function Clientes() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {clientes.map((cliente, index) => (
+                                {proveedores.map((proveedor, index) => (
                                     <TableRow
-                                        key={cliente.id}
+                                        key={proveedor.id}
                                         sx={{
                                             backgroundColor: index % 2 === 0 ? "#ffffff" : "#fcfdff",
                                             "&:hover": { backgroundColor: "#f1f5f9" },
                                             transition: "background-color 0.2s"
                                         }}
                                     >
-                                        <TableCell sx={{ color: "#64748b", fontWeight: 500 }}>#{cliente.id}</TableCell>
-                                        <TableCell sx={{ color: "#1e293b", fontWeight: 600 }}>{cliente.nombreRazonSocial}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{cliente.duiNit}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{cliente.nrc}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{cliente.direccion}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{cliente.telefono || "N/D"}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{cliente.correo || "N/D"}</TableCell>
+                                        <TableCell sx={{ color: "#64748b", fontWeight: 500 }}>#{proveedor.id}</TableCell>
+                                        <TableCell sx={{ color: "#1e293b", fontWeight: 600 }}>{proveedor.nombreRazonSocial}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{proveedor.duiNit}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{proveedor.nrc}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{proveedor.direccion}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{proveedor.telefono || "N/D"}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{proveedor.correo || "N/D"}</TableCell>
                                         <TableCell align="center">
                                             <Tooltip title="Editar">
                                                 <IconButton
                                                     size="small"
-                                                    onClick={() => handleAbrirEditar(cliente)}
+                                                    onClick={() => handleAbrirEditar(proveedor)}
                                                     sx={{
                                                         color: "#3b82f6",
                                                         backgroundColor: "rgba(59, 130, 246, 0.08)",
@@ -210,7 +210,7 @@ export default function Clientes() {
                                             <Tooltip title="Eliminar">
                                                 <IconButton
                                                     size="small"
-                                                    onClick={() => handleEliminar(cliente.id)}
+                                                    onClick={() => handleEliminar(proveedor.id)}
                                                     sx={{
                                                         color: "#ef4444",
                                                         backgroundColor: "rgba(239, 68, 68, 0.08)",
@@ -223,10 +223,10 @@ export default function Clientes() {
                                         </TableCell>
                                     </TableRow>
                                 ))}
-                                {clientes.length === 0 && (
+                                {proveedores.length === 0 && (
                                     <TableRow>
                                         <TableCell colSpan={8} align="center" sx={{ py: 6, color: "#94a3b8" }}>
-                                            No hay clientes registrados en este momento.
+                                            No hay proveedores registrados en este momento.
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -250,7 +250,7 @@ export default function Clientes() {
                     <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1.5, pb: 1, pt: 2, px: 3 }}>
                         <PersonAddAlt1Icon sx={{ color: logoGreen }} />
                         <Typography variant="h6" sx={{ fontWeight: 700, color: "#1e293b" }}>
-                            {isEditing ? "Editar Información del Cliente" : "Registrar Nuevo Cliente"}
+                            {isEditing ? "Editar Información del Proveedor" : "Registrar Nuevo Proveedor"}
                         </Typography>
                     </DialogTitle>
                     <DialogContent sx={{ px: 3, py: 2 }}>
@@ -259,47 +259,47 @@ export default function Clientes() {
                                 label="Nombre / Razón Social"
                                 fullWidth
                                 required
-                                value={clienteActual.nombreRazonSocial}
-                                onChange={(e) => setClienteActual({ ...clienteActual, nombreRazonSocial: e.target.value })}
+                                value={proveedorActual.nombreRazonSocial}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, nombreRazonSocial: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
                                 label="DUI / NIT"
                                 fullWidth
                                 required
-                                value={clienteActual.duiNit}
-                                onChange={(e) => setClienteActual({ ...clienteActual, duiNit: e.target.value })}
+                                value={proveedorActual.duiNit}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, duiNit: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
                                 label="NRC"
                                 fullWidth
                                 required
-                                value={clienteActual.nrc}
-                                onChange={(e) => setClienteActual({ ...clienteActual, nrc: e.target.value })}
+                                value={proveedorActual.nrc}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, nrc: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
                                 label="Direccion"
                                 fullWidth
                                 required
-                                value={clienteActual.direccion}
-                                onChange={(e) => setClienteActual({ ...clienteActual, direccion: e.target.value })}
+                                value={proveedorActual.direccion}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, direccion: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
                                 label="Teléfono"
                                 fullWidth
-                                value={clienteActual.telefono}
-                                onChange={(e) => setClienteActual({ ...clienteActual, telefono: e.target.value })}
+                                value={proveedorActual.telefono}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, telefono: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
                                 label="Correo Electrónico"
                                 type="email"
                                 fullWidth
-                                value={clienteActual.correo}
-                                onChange={(e) => setClienteActual({ ...clienteActual, correo: e.target.value })}
+                                value={proveedorActual.correo}
+                                onChange={(e) => setProveedorActual({ ...proveedorActual, correo: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                         </Box>

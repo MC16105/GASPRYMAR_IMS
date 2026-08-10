@@ -4,7 +4,6 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import MainLayout from "./layouts/MainLayout";
 
-
 function App() {
   return (
       <BrowserRouter>
@@ -19,8 +18,6 @@ function App() {
             {/* /dashboard */}
             <Route index element={<Dashboard />} />
 
-
-
           </Route>
 
         </Routes>
@@ -28,4 +25,4 @@ function App() {
   );
 }
 
-export default App;export default App;
+export default App;
