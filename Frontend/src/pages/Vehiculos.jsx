@@ -115,7 +115,7 @@ export default function Vehiculos() {
                         Directorio de Vehiculos
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#64748b", mt: 0.5 }}>
-                        Gestión y control de cartera de Vehiculos de GRASPYMAR
+                        Gestión y control de cartera de Vehiculos de GASPRYMAR
                     </Typography>
                 </Box>
                 <Button

@@ -113,7 +113,7 @@ export default function Clientes() {
                         Directorio de Clientes
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#64748b", mt: 0.5 }}>
-                        Gestión y control de cartera de clientes de GRASPYMAR
+                        Gestión y control de cartera de clientes de GASPRYMAR
                     </Typography>
                 </Box>
                 <Button

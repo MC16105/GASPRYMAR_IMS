@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, Container, Paper, TextField, Typography, Alert } from "@mui/material";
 import Logo from "../logos/GCF.png";
 
-// Definimos tu color verde corporativo
+// Color verde corporativo
 const logoGreen = "#1E5631";
 
 export default function Login() {

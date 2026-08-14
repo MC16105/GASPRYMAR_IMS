@@ -113,7 +113,7 @@ export default function Proveedores() {
                         Directorio de Proveedores
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#64748b", mt: 0.5 }}>
-                        Gestión y control de cartera de proveedores de GRASPYMAR
+                        Gestión y control de cartera de proveedores de GASPRYMAR
                     </Typography>
                 </Box>
                 <Button

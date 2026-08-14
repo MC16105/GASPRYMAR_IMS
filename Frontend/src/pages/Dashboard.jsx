@@ -7,6 +7,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import WaterIcon from "@mui/icons-material/Water";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
+import CategoryIcon from "@mui/icons-material/Category";
 
 const logoGreen = "#1E5631";
 export default function Dashboard() {
@@ -16,7 +17,8 @@ export default function Dashboard() {
         clientes: 0,
         estanques: 0,
         vehiculos: 0,
-        maquinarias: 0
+        maquinarias: 0,
+        productos: 0
     });
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
@@ -33,14 +35,16 @@ export default function Dashboard() {
                 clientes,
                 estanques,
                 vehiculos,
-                maquinarias
+                maquinarias,
+                productos
             ] = await Promise.all([
                 api.get("/insumos"),
                 api.get("/proveedores"),
                 api.get("/clientes"),
                 api.get("/estanques"),
                 api.get("/vehiculos"),
-                api.get("/maquinarias")
+                api.get("/maquinarias"),
+                api.get("/productos")
             ]);
 
             setDatos({
@@ -49,7 +53,8 @@ export default function Dashboard() {
                 clientes: clientes.data.length,
                 estanques: estanques.data.length,
                 vehiculos: vehiculos.data.length,
-                maquinarias: maquinarias.data.length
+                maquinarias: maquinarias.data.length,
+                productos: productos.data.length
             });
         } catch (err) {
             console.error("Error cargando Dashboard:", err);
@@ -91,6 +96,11 @@ export default function Dashboard() {
             titulo: "Maquinaria",
             cantidad: datos.maquinarias,
             icon: <PrecisionManufacturingIcon />
+        },
+        {
+            titulo: "Productos",
+            cantidad: datos.productos,
+            icon: <CategoryIcon />
         }
     ];
 

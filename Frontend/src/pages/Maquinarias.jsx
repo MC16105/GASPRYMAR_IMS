@@ -7,87 +7,90 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import { listarInsumo, crearInsumo, actualizarInsumo, eliminarInsumo } from "../services/insumoService";
+import { listarMaquinaria, crearMaquinaria, actualizarMaquinaria, eliminarMaquinaria } from "../services/maquinariaService";
 
 const logoGreen = "#1E5631";
 const initialState = {
     nombre: "",
-    unidadMedida: "",
-    stockActual:"",
-    stockMinimo: "",
-    precioReferencia: ""
+    codigo: "",
+    tipo:"",
+    marca: "",
+    modelo: "",
+    anio: "",
+    estado: "",
+    observaciones: ""
 };
 
-export default function Insumos() {
-    const [insumos, setInsumos] = useState([]);
+export default function Maquinarias() {
+    const [maquinarias, setMaquinarias] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState("");
 
     const [openModal, setOpenModal] = useState(false);
-    const [insumoActual, setInsumoActual] = useState(initialState);
+    const [maquinariaActual, setMaquinariaActual] = useState(initialState);
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-        cargarInsumos();
+        cargarMaquinarias();
     }, []);
 
-    const cargarInsumos = async () => {
+    const cargarMaquinarias = async () => {
         try {
             setCargando(true);
             setError("");
-            const respuesta = await listarInsumo();
-            setInsumos(respuesta.data);
+            const respuesta = await listarMaquinaria();
+            setMaquinarias(respuesta.data);
         } catch (err) {
             console.error(err);
-            setError("No se pudieron cargar los insumos.");
+            setError("No se pudieron cargar la Maquinaria.");
         } finally {
             setCargando(false);
         }
     };
 
     const handleAbrirCrear = () => {
-        setInsumoActual(initialState);
+        setMaquinariaActual(initialState);
         setIsEditing(false);
         setOpenModal(true);
     };
 
-    const handleAbrirEditar = (insumo) => {
-        setInsumoActual(insumo);
+    const handleAbrirEditar = (maquinaria) => {
+        setMaquinariaActual(maquinaria);
         setIsEditing(true);
         setOpenModal(true);
     };
 
     const handleCerrarModal = () => {
         setOpenModal(false);
-        setInsumoActual(initialState);
+        setMaquinariaActual(initialState);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (isEditing) {
-                await actualizarInsumo(insumoActual.id, insumoActual);
+                await actualizarMaquinaria(maquinariaActual.id, maquinariaActual);
             } else {
-                await crearInsumo(insumoActual);
+                await crearMaquinaria(maquinariaActual);
             }
-            await cargarInsumos();
+            await cargarMaquinarias();
             handleCerrarModal();
         } catch (err) {
             console.error(err);
-            setError("No se pudo guardar el Insumo.");
+            setError("No se pudo guardar la maquinaria.");
         }
     };
 
     const handleEliminar = async (id) => {
-        if (!window.confirm("¿Deseas eliminar este Insumo?")) {
+        if (!window.confirm("¿Deseas eliminar este Maquinaria?")) {
             return;
         }
         try {
-            await eliminarInsumo(id);
-            await cargarInsumos();
+            await eliminarMaquinaria(id);
+            await cargarMaquinarias();
         } catch (err) {
             console.error(err);
-            setError("No se pudo eliminar el insumo.");
+            setError("No se pudo eliminar la maquinaria.");
         }
     };
 
@@ -109,10 +112,10 @@ export default function Insumos() {
             >
                 <Box>
                     <Typography variant="h5" sx={{ fontWeight: 800, color: "#1e293b", letterSpacing: "-0.5px" }}>
-                        Directorio de Insumos
+                        Directorio de Maquinaria
                     </Typography>
                     <Typography variant="body2" sx={{ color: "#64748b", mt: 0.5 }}>
-                        Gestión y control de cartera de Insumos de GASPRYMAR
+                        Gestión y control de cartera de Maquinaria de GASPRYMAR
                     </Typography>
                 </Box>
                 <Button
@@ -135,7 +138,7 @@ export default function Insumos() {
                         }
                     }}
                 >
-                    Nuevo Insumo
+                    Nueva Maquina
                 </Button>
             </Box>
 
@@ -166,34 +169,40 @@ export default function Insumos() {
                                 <TableRow>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569", py: 2 }}>ID</TableCell>
                                     <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Nombre</TableCell>
-                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Unidad de Medida</TableCell>
-                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Stock Actual</TableCell>
-                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Stock Minimo</TableCell>
-                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Precio Referencia</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Codigo</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Tipo</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Marca</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Modelo</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Año</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Estado</TableCell>
+                                    <TableCell sx={{ fontWeight: 700, color: "#475569" }}>Observaciones</TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 700, color: "#475569" }}>Acciones</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {insumos.map((insumo, index) => (
+                                {maquinarias.map((maquinaria, index) => (
                                     <TableRow
-                                        key={insumo.id}
+                                        key={maquinaria.id}
                                         sx={{
                                             backgroundColor: index % 2 === 0 ? "#ffffff" : "#fcfdff",
                                             "&:hover": { backgroundColor: "#f1f5f9" },
                                             transition: "background-color 0.2s"
                                         }}
                                     >
-                                        <TableCell sx={{ color: "#64748b", fontWeight: 500 }}>#{insumo.id}</TableCell>
-                                        <TableCell sx={{ color: "#1e293b", fontWeight: 600 }}>{insumo.nombre}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{insumo.unidadMedida}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{insumo.stockActual}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{insumo.stockMinimo}</TableCell>
-                                        <TableCell sx={{ color: "#334155" }}>{insumo.precioReferencia}</TableCell>
-                                         <TableCell align="center">
+                                        <TableCell sx={{ color: "#64748b", fontWeight: 500 }}>#{maquinaria.id}</TableCell>
+                                        <TableCell sx={{ color: "#1e293b", fontWeight: 600 }}>{maquinaria.nombre}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.codigo}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.tipo}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.marca}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.modelo}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.anio}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.estado || "N/D"}</TableCell>
+                                        <TableCell sx={{ color: "#334155" }}>{maquinaria.observaciones || "N/D"}</TableCell>
+                                        <TableCell align="center">
                                             <Tooltip title="Editar">
                                                 <IconButton
                                                     size="small"
-                                                    onClick={() => handleAbrirEditar(insumo)}
+                                                    onClick={() => handleAbrirEditar(maquinaria)}
                                                     sx={{
                                                         color: "#3b82f6",
                                                         backgroundColor: "rgba(59, 130, 246, 0.08)",
@@ -207,7 +216,7 @@ export default function Insumos() {
                                             <Tooltip title="Eliminar">
                                                 <IconButton
                                                     size="small"
-                                                    onClick={() => handleEliminar(insumo.id)}
+                                                    onClick={() => handleEliminar(maquinaria.id)}
                                                     sx={{
                                                         color: "#ef4444",
                                                         backgroundColor: "rgba(239, 68, 68, 0.08)",
@@ -220,10 +229,10 @@ export default function Insumos() {
                                         </TableCell>
                                     </TableRow>
                                 ))}
-                                {insumos.length === 0 && (
+                                {maquinarias.length === 0 && (
                                     <TableRow>
-                                        <TableCell colSpan={7} align="center" sx={{ py: 6, color: "#94a3b8" }}>
-                                            No hay insumos registrados en este momento.
+                                        <TableCell colSpan={10} align="center" sx={{ py: 6, color: "#94a3b8" }}>
+                                            No hay maquinarias registradas en este momento.
                                         </TableCell>
                                     </TableRow>
                                 )}
@@ -247,7 +256,7 @@ export default function Insumos() {
                     <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1.5, pb: 1, pt: 2, px: 3 }}>
                         <PersonAddAlt1Icon sx={{ color: logoGreen }} />
                         <Typography variant="h6" sx={{ fontWeight: 700, color: "#1e293b" }}>
-                            {isEditing ? "Editar Información del Insumos" : "Registrar Nuevo Insumos"}
+                            {isEditing ? "Editar Información de la Maquinaria" : "Registrar Nueva Maquinaria"}
                         </Typography>
                     </DialogTitle>
                     <DialogContent sx={{ px: 3, py: 2 }}>
@@ -256,39 +265,60 @@ export default function Insumos() {
                                 label="Nombre"
                                 fullWidth
                                 required
-                                value={insumoActual.nombre}
-                                onChange={(e) => setInsumoActual({ ...insumoActual, nombre: e.target.value })}
+                                value={maquinariaActual.nombre}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, nombre: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
-                                label="Unidad de Medida"
+                                label="Codigo"
                                 fullWidth
                                 required
-                                value={insumoActual.unidadMedida}
-                                onChange={(e) => setInsumoActual({ ...insumoActual, unidadMedida: e.target.value })}
+                                value={maquinariaActual.codigo}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, codigo: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
-                                label="Stock Actual"
+                                label="Tipo"
+                                fullWidth
+                                value={maquinariaActual.tipo}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, tipo: e.target.value })}
+                                sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
+                            />
+                            <TextField
+                                label="Marca"
                                 fullWidth
                                 required
-                                value={insumoActual.stockActual}
-                                onChange={(e) => setInsumoActual({ ...insumoActual, stockActual: e.target.value })}
+                                value={maquinariaActual.marca}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, marca: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
-                                label="Stock Minimo"
+                                label="Modelo"
                                 fullWidth
                                 required
-                                value={insumoActual.stockMinimo}
-                                onChange={(e) => setInsumoActual({ ...insumoActual, stockMinimo: e.target.value })}
+                                value={maquinariaActual.modelo}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, modelo: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                             <TextField
-                                label="Precio Referencia"
+                                label="Año"
                                 fullWidth
-                                value={insumoActual.precioReferencia}
-                                onChange={(e) => setInsumoActual({ ...insumoActual, precioReferencia: e.target.value })}
+                                value={maquinariaActual.anio}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, anio: e.target.value })}
+                                sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
+                            />
+                            <TextField
+                                label="Estado"
+                                fullWidth
+                                value={maquinariaActual.estado}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, estado: e.target.value })}
+                                sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
+                            />
+                            <TextField
+                                label="Observaciones"
+                                fullWidth
+                                value={maquinariaActual.observaciones}
+                                onChange={(e) => setMaquinariaActual({ ...maquinariaActual, observaciones: e.target.value })}
                                 sx={{ "& .MuiOutlinedInput-root": { borderRadius: "10px" } }}
                             />
                         </Box>

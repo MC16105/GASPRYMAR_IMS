@@ -8,7 +8,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CategoryIcon from "@mui/icons-material/Category";
-import FolderIcon from "@mui/icons-material/Folder";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import SecurityIcon from "@mui/icons-material/Security";
@@ -92,9 +91,9 @@ const menuSections = [
                 path: "/dashboard/carga-combustible"
             },
             {
-                text: "Maquinaria",
+                text: "Maquinarias",
                 icon: <PrecisionManufacturingIcon />,
-                path: "/dashboard/maquinaria"
+                path: "/dashboard/maquinarias"
             }
         ]
     },
