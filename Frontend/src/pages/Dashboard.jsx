@@ -165,16 +165,24 @@ export default function Dashboard() {
                     />
                 </Box>
             ) : (
-                <Grid
-                    container
-                    spacing={3}
+                <Box
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: {
+                            xs: "1fr",
+                            sm: "repeat(2, 1fr)",
+                            md: "repeat(3, 1fr)"
+                        },
+                        gap: 3
+                    }}
                 >
                     {tarjetas.map((tarjeta) => (
-                        <Grid
+                        <Box
                             item
                             xs={12}
-                            sm={6}
-                            md={4}
+                            sm={3}
+                            md={3}
+                            lg={3}
                             key={tarjeta.titulo}
                         >
                             <Paper
@@ -274,9 +282,9 @@ export default function Dashboard() {
                                     </Box>
                                 </Box>
                             </Paper>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             )}
         </Box>
    );
