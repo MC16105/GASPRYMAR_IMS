@@ -9,6 +9,7 @@ import Vehiculos from "../pages/Vehiculos";
 import Estanques from "../pages/Estanques";
 import Maquinarias from "../pages/Maquinarias";
 import Productos from "../pages/Productos";
+import Compras from "../pages/Compras";
 
 export default function AppRouter() {
     return (
@@ -33,6 +34,8 @@ export default function AppRouter() {
                 <Route path="maquinarias" element={<Maquinarias />} />
 
                 <Route path="productos" element={<Productos />} />
+
+                <Route path="compras" element={<Compras />} />
 
             </Route>
         </Routes>
