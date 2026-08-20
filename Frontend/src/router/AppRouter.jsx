@@ -10,6 +10,7 @@ import Estanques from "../pages/Estanques";
 import Maquinarias from "../pages/Maquinarias";
 import Productos from "../pages/Productos";
 import Compras from "../pages/Compras";
+import Ventas from "../pages/Ventas";
 
 export default function AppRouter() {
     return (
@@ -36,6 +37,8 @@ export default function AppRouter() {
                 <Route path="productos" element={<Productos />} />
 
                 <Route path="compras" element={<Compras />} />
+
+                <Route path="ventas" element={<Ventas />} />
 
             </Route>
         </Routes>
