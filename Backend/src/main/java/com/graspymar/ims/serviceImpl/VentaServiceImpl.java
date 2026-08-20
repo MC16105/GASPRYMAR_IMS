@@ -144,7 +144,7 @@ public class VentaServiceImpl implements VentaService {
                                 DetalleVentaResponseDTO.builder()
                                         .id(detalle.getId())
                                         .productoId(detalle.getProducto().getId())
-                                        .nombreInsumo(detalle.getProducto().getNombre())
+                                        .nombreProducto(detalle.getProducto().getNombre())
                                         .cantidad(detalle.getCantidad())
                                         .precioUnitario(detalle.getPrecioUnitario())
                                         .subtotal(detalle.getSubtotal())

@@ -14,7 +14,7 @@ public class DetalleVentaResponseDTO {
 
     private Long productoId;
 
-    private String nombreInsumo;
+    private String nombreProducto;
 
     private Integer cantidad;
 
