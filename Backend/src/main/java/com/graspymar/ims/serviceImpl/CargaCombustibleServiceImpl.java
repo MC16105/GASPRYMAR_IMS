@@ -114,7 +114,9 @@ public class CargaCombustibleServiceImpl implements CargaCombustibleService {
 
         return CargaCombustibleResponseDTO.builder()
                 .id(carga.getId())
+                .vehiculoId(carga.getVehiculo().getId())
                 .vehiculo(carga.getVehiculo().getPlaca())
+                .proveedorId(carga.getProveedor().getId())
                 .proveedor(carga.getProveedor().getNombreRazonSocial())
                 .fecha(carga.getFecha())
                 .galones(carga.getGalones())

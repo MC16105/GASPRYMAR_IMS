@@ -4,12 +4,12 @@ export const listarEstanque = () => {
     return api.get("/estanques");
 };
 
-export const crearEstanque  = (cliente) => {
-    return api.post("/estanques", cliente);
+export const crearEstanque  = (estanque) => {
+    return api.post("/estanques", estanque);
 };
 
-export const actualizarEstanque  = (id, cliente) => {
-    return api.put(`/estanques/${id}`, cliente);
+export const actualizarEstanque  = (id, estanque) => {
+    return api.put(`/estanques/${id}`, estanque);
 };
 
 export const eliminarEstanque  = (id) => {

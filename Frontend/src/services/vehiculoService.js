@@ -4,12 +4,12 @@ export const listarVehiculo = () => {
     return api.get("/vehiculos");
 };
 
-export const crearVehiculo  = (cliente) => {
-    return api.post("/vehiculos", cliente);
+export const crearVehiculo  = (vehiculo) => {
+    return api.post("/vehiculos", vehiculo);
 };
 
-export const actualizarVehiculo  = (id, cliente) => {
-    return api.put(`/vehiculos/${id}`, cliente);
+export const actualizarVehiculo  = (id, vehiculo) => {
+    return api.put(`/vehiculos/${id}`, vehiculo);
 };
 
 export const eliminarVehiculo  = (id) => {

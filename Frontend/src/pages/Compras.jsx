@@ -104,8 +104,7 @@ export default function Compras() {
         });
     };
     const eliminarDetalle = (index) => {
-        const nuevosDetalles =
-            compraActual.detalles.filter(
+        const nuevosDetalles = compraActual.detalles.filter(
                 (_, i) => i !== index
             );
         setCompraActual({
@@ -115,10 +114,8 @@ export default function Compras() {
     };
     // CÁLCULOS VISUALES
     const calcularSubtotal = (detalle) => {
-        const cantidad =
-            Number(detalle.cantidad) || 0;
-        const precio =
-            Number(detalle.precioUnitario) || 0;
+        const cantidad = Number(detalle.cantidad) || 0;
+        const precio = Number(detalle.precioUnitario) || 0;
         return cantidad * precio;
     };
     const calcularTotal = () => {
@@ -153,23 +150,15 @@ export default function Compras() {
              * NO subtotal
              */
             const payload = {
-                proveedorId:
-                    Number(compraActual.proveedorId),
-                fecha:
-                compraActual.fecha,
-                documentoFiscal:
-                compraActual.documentoFiscal,
-                observaciones:
-                compraActual.observaciones,
-                detalles:
-                    compraActual.detalles.map(
+                proveedorId: Number(compraActual.proveedorId),
+                fecha: compraActual.fecha,
+                documentoFiscal: compraActual.documentoFiscal,
+                observaciones: compraActual.observaciones,
+                detalles: compraActual.detalles.map(
                         (detalle) => ({
-                            insumoId:
-                                Number(detalle.insumoId),
-                            cantidad:
-                                Number(detalle.cantidad),
-                            precioUnitario:
-                                Number(detalle.precioUnitario)
+                            insumoId: Number(detalle.insumoId),
+                            cantidad: Number(detalle.cantidad),
+                            precioUnitario: Number(detalle.precioUnitario)
                         })
                     )
             };
@@ -222,10 +211,8 @@ export default function Compras() {
                     backgroundColor: "#ffffff",
                     p: 3,
                     borderRadius: 4,
-                    boxShadow:
-                        "0px 2px 4px rgba(0,0,0,0.02)",
-                    border:
-                        "1px solid #f1f5f9"
+                    boxShadow: "0px 2px 4px rgba(0,0,0,0.02)",
+                    border: "1px solid #f1f5f9"
                 }}
             >
                 <Box>
@@ -295,10 +282,8 @@ export default function Compras() {
                 sx={{
                     borderRadius: 4,
                     overflow: "hidden",
-                    border:
-                        "1px solid #e2e8f0",
-                    boxShadow:
-                        "0px 4px 20px rgba(0,0,0,0.03)"
+                    border: "1px solid #e2e8f0",
+                    boxShadow: "0px 4px 20px rgba(0,0,0,0.03)"
                 }}
             >
                 {cargando ? (
@@ -324,8 +309,7 @@ export default function Compras() {
                         >
                             <TableHead
                                 sx={{
-                                    backgroundColor:
-                                        "#f8fafc"
+                                    backgroundColor: "#f8fafc"
                                 }}
                             >
                                 <TableRow>
@@ -392,8 +376,7 @@ export default function Compras() {
                                                         ? "#ffffff"
                                                         : "#fcfdff",
                                                 "&:hover": {
-                                                    backgroundColor:
-                                                        "#f1f5f9"
+                                                    backgroundColor: "#f1f5f9"
                                                 }
                                             }}
                                         >
@@ -441,10 +424,8 @@ export default function Compras() {
                                                             )
                                                         }
                                                         sx={{
-                                                            color:
-                                                            logoGreen,
-                                                            backgroundColor:
-                                                                "rgba(30,86,49,0.08)",
+                                                            color: logoGreen,
+                                                            backgroundColor: "rgba(30,86,49,0.08)",
                                                             mr: 1
                                                         }}
                                                     >
@@ -464,10 +445,8 @@ export default function Compras() {
                                                             )
                                                         }
                                                         sx={{
-                                                            color:
-                                                                "#ef4444",
-                                                            backgroundColor:
-                                                                "rgba(239,68,68,0.08)"
+                                                            color: "#ef4444",
+                                                            backgroundColor: "rgba(239,68,68,0.08)"
                                                         }}
                                                     >
                                                         <DeleteIcon
@@ -486,8 +465,7 @@ export default function Compras() {
                                             align="center"
                                             sx={{
                                                 py: 6,
-                                                color:
-                                                    "#94a3b8"
+                                                color: "#94a3b8"
                                             }}
                                         >
                                             No hay compras registradas.
@@ -637,8 +615,7 @@ export default function Compras() {
                         <Box
                             sx={{
                                 display: "flex",
-                                justifyContent:
-                                    "space-between",
+                                justifyContent: "space-between",
                                 alignItems: "center",
                                 mb: 2
                             }}
@@ -672,21 +649,16 @@ export default function Compras() {
                                         p: 2,
                                         mb: 2,
                                         borderRadius: 3,
-                                        border:
-                                            "1px solid #e2e8f0",
-                                        backgroundColor:
-                                            "#f8fafc"
+                                        border: "1px solid #e2e8f0",
+                                        backgroundColor: "#f8fafc"
                                     }}
                                 >
                                     <Box
                                         sx={{
-                                            display:
-                                                "grid",
+                                            display: "grid",
                                             gridTemplateColumns: {
-                                                xs:
-                                                    "1fr",
-                                                md:
-                                                    "2fr 1fr 1fr 1fr auto"
+                                                xs: "1fr",
+                                                md: "2fr 1fr 1fr 1fr auto"
                                             },
                                             gap: 2,
                                             alignItems:
@@ -762,8 +734,7 @@ export default function Compras() {
                                             required
                                             inputProps={{
                                                 min: 0,
-                                                step:
-                                                    "0.01"
+                                                step: "0.01"
                                             }}
                                             value={
                                                 detalle.precioUnitario
@@ -828,10 +799,8 @@ export default function Compras() {
                                     px: 3,
                                     py: 2,
                                     borderRadius: 3,
-                                    backgroundColor:
-                                        "rgba(30,86,49,0.08)",
-                                    border:
-                                        "1px solid rgba(30,86,49,0.20)"
+                                    backgroundColor: "rgba(30,86,49,0.08)",
+                                    border: "1px solid rgba(30,86,49,0.20)"
                                 }}
                             >
                                 <Typography
@@ -924,18 +893,10 @@ export default function Compras() {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>
-                                                Insumo
-                                            </TableCell>
-                                            <TableCell>
-                                                Cantidad
-                                            </TableCell>
-                                            <TableCell>
-                                                Precio
-                                            </TableCell>
-                                            <TableCell>
-                                                Subtotal
-                                            </TableCell>
+                                            <TableCell>Insumo</TableCell>
+                                            <TableCell>Cantidad</TableCell>
+                                            <TableCell>Precio</TableCell>
+                                            <TableCell>Subtotal</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>

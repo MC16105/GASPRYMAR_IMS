@@ -5,11 +5,11 @@ export const listarInsumo = () => {
 };
 
 export const crearInsumo  = (cliente) => {
-    return api.post("/insumos", cliente);
+    return api.post("/insumos", insumo);
 };
 
-export const actualizarInsumo  = (id, cliente) => {
-    return api.put(`/insumos/${id}`, cliente);
+export const actualizarInsumo  = (id, insumo) => {
+    return api.put(`/insumos/${id}`, insumo);
 };
 
 export const eliminarInsumo  = (id) => {

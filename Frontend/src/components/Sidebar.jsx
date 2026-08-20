@@ -88,7 +88,7 @@ const menuSections = [
             {
                 text: "Carga de Combustible",
                 icon: <LocalGasStationIcon />,
-                path: "/dashboard/carga-combustible"
+                path: "/dashboard/carga_combustibles"
             },
             {
                 text: "Maquinarias",

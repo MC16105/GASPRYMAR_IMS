@@ -1,7 +1,5 @@
 package com.graspymar.ims.dto;
 
-import com.graspymar.ims.entity.Proveedor;
-import com.graspymar.ims.entity.Vehiculo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

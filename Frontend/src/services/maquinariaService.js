@@ -4,12 +4,12 @@ export const listarMaquinaria = () => {
     return api.get("/maquinarias");
 };
 
-export const crearMaquinaria  = (cliente) => {
-    return api.post("/maquinarias", cliente);
+export const crearMaquinaria  = (maquinaria) => {
+    return api.post("/maquinarias", maquinaria);
 };
 
-export const actualizarMaquinaria  = (id, cliente) => {
-    return api.put(`/maquinarias/${id}`, cliente);
+export const actualizarMaquinaria  = (id, maquinaria) => {
+    return api.put(`/maquinarias/${id}`, maquinaria);
 };
 
 export const eliminarMaquinaria  = (id) => {

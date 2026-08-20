@@ -1,7 +1,5 @@
 package com.graspymar.ims.dto;
 
-import com.graspymar.ims.entity.Proveedor;
-import com.graspymar.ims.entity.Vehiculo;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -16,8 +14,10 @@ public class CargaCombustibleResponseDTO {
 
     private Long id;
 
+    private Long vehiculoId;
     private String vehiculo;
 
+    private Long proveedorId;
     private String proveedor;
 
     private LocalDate fecha;
