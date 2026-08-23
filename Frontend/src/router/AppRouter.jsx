@@ -15,6 +15,7 @@ import CargaCombustible from "../pages/CargaCombustible";
 import Producciones from "../pages/Producciones";
 import ControlEstanque from "../pages/ControlEstanque";
 import ControlMaquinaria from "../pages/ControlMaquinaria";
+import Usuarios from "../pages/Usuarios";
 
 export default function AppRouter() {
     return (
@@ -51,6 +52,8 @@ export default function AppRouter() {
                 <Route path="control_estanque" element={<ControlEstanque />} />
 
                 <Route path="control_maquinaria" element={<ControlMaquinaria />} />
+
+                <Route path="usuarios" element={<Usuarios />} />
 
             </Route>
         </Routes>
