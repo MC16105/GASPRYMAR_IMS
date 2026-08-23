@@ -78,7 +78,7 @@ const menuSections = [
             {
                 text: "Producción",
                 icon: <Inventory2Icon />,
-                path: "/dashboard/produccion"
+                path: "/dashboard/producciones"
             },
             {
                 text: "Control de Estanques",

@@ -15,6 +15,7 @@ public class ProduccionResponseDTO {
 
     private Long id;
 
+    private Long productoId;
     private String producto;
 
     private TipoProduccion tipoMovimiento;

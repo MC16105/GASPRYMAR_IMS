@@ -134,6 +134,7 @@ public class ProduccionServiceImpl implements ProduccionService {
 
         return ProduccionResponseDTO.builder()
                 .id(produccion.getId())
+                .productoId(produccion.getProducto().getId())
                 .producto(produccion.getProducto().getNombre())
                 .tipoMovimiento(produccion.getTipoMovimiento())
                 .fecha(produccion.getFecha())
