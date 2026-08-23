@@ -13,6 +13,8 @@ import Compras from "../pages/Compras";
 import Ventas from "../pages/Ventas";
 import CargaCombustible from "../pages/CargaCombustible";
 import Producciones from "../pages/Producciones";
+import ControlEstanque from "../pages/ControlEstanque";
+import ControlMaquinaria from "../pages/ControlMaquinaria";
 
 export default function AppRouter() {
     return (
@@ -45,6 +47,10 @@ export default function AppRouter() {
                 <Route path="carga_combustibles" element={<CargaCombustible />} />
 
                 <Route path="producciones" element={<Producciones />} />
+
+                <Route path="control_estanque" element={<ControlEstanque />} />
+
+                <Route path="control_maquinaria" element={<ControlMaquinaria />} />
 
             </Route>
         </Routes>

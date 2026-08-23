@@ -1,8 +1,6 @@
-import {Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography
-} from "@mui/material";
+import {Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography} from "@mui/material";
 
 import {useNavigate, useLocation } from "react-router-dom";
-
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
@@ -14,6 +12,7 @@ import SecurityIcon from "@mui/icons-material/Security";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import WaterIcon from "@mui/icons-material/Water";
 import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import SettingsIcon from "@mui/icons-material/Settings"
 
 const logoGreen = "#1E5631";
 const menuSections = [
@@ -83,7 +82,7 @@ const menuSections = [
             {
                 text: "Control de Estanques",
                 icon: <WaterIcon />,
-                path: "/dashboard/control-estanques"
+                path: "/dashboard/control_estanque"
             },
             {
                 text: "Carga de Combustible",
@@ -94,6 +93,11 @@ const menuSections = [
                 text: "Maquinarias",
                 icon: <PrecisionManufacturingIcon />,
                 path: "/dashboard/maquinarias"
+            },
+            {
+                text: "Control de Maquinaria",
+                icon: <SettingsIcon />,
+                path: "/dashboard/control_maquinaria"
             }
         ]
     },
