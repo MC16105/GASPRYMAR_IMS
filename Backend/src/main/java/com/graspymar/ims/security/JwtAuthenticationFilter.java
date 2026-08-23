@@ -5,7 +5,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,48 +15,103 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends OncePerRequestFilter{
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain)
-            throws ServletException, IOException {
+            HttpServletRequest request,
+            HttpServletResponse response,
+            FilterChain filterChain
+    ) throws ServletException, IOException {
 
-        final String authHeader = request.getHeader("Authorization");
+        String authHeader = request.getHeader("Authorization");
 
+        // Si no hay token, dejamos que Spring Security decida
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        String jwt = authHeader.substring(7);
-        String username = jwtService.extractUsername(jwt);
+        String token = authHeader.substring(7);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        try {
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            String username = jwtService.extractUsername(token);
 
-            if (jwtService.isTokenValid(jwt, userDetails)) {
+            if (
+                    username != null &&
+                            SecurityContextHolder
+                                    .getContext()
+                                    .getAuthentication() == null
+            ) {
 
-                UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(
-                                userDetails, null, userDetails.getAuthorities()
-                        );
+                UserDetails userDetails =
+                        userDetailsService
+                                .loadUserByUsername(username);
 
-                authToken.setDetails(new WebAuthenticationDetailsSource()
-                                .buildDetails(request)
-                );
+                if (jwtService.isTokenValid(token, userDetails)) {
 
-                SecurityContextHolder.getContext()
-                        .setAuthentication(authToken);
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails,
+                                    null,
+                                    userDetails.getAuthorities()
+                            );
+
+                    authentication.setDetails(
+                            new WebAuthenticationDetailsSource()
+                                    .buildDetails(request)
+                    );
+
+                    SecurityContextHolder
+                            .getContext()
+                            .setAuthentication(authentication);
+
+                } else {
+
+                    enviar401(response);
+
+                    return;
+                }
             }
-        }
 
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+
+        } catch (Exception e) {
+
+            SecurityContextHolder.clearContext();
+
+            enviar401(response);
+
+        }
     }
 
+
+    private void enviar401(
+            HttpServletResponse response
+    ) throws IOException {
+
+        response.setStatus(
+                HttpServletResponse.SC_UNAUTHORIZED
+        );
+
+        response.setContentType(
+                "application/json"
+        );
+
+        response.setCharacterEncoding("UTF-8");
+
+        response.getWriter().write(
+                """
+                {
+                    "status": 401,
+                    "error": "Unauthorized",
+                    "message": "Token inválido o expirado"
+                }
+                """
+        );
+    }
 }
