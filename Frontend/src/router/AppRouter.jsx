@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
+import ProtectedRoute from "./ProtectedRoute";
+
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Clientes from "../pages/Clientes";
@@ -22,6 +24,8 @@ export default function AppRouter() {
         <Routes>
 
             <Route path="/" element={<Login />} />
+
+            <Route element={<ProtectedRoute />}>
 
             <Route path="/dashboard" element={<MainLayout />}>
 
@@ -56,6 +60,8 @@ export default function AppRouter() {
                 <Route path="usuarios" element={<Usuarios />} />
 
             </Route>
+
+        </Route>
         </Routes>
     );
 }
