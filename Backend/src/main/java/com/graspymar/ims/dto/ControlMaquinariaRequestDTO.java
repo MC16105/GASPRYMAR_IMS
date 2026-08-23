@@ -1,6 +1,7 @@
 package com.graspymar.ims.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import java.time.LocalDate;
@@ -25,5 +26,6 @@ public class ControlMaquinariaRequestDTO {
     @NotBlank
     private String operador;
 
+    @NotEmpty
     private List<DetalleControlMaquinariaRequestDTO> detalles;
 }
