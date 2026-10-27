@@ -25,13 +25,13 @@ public class Vehiculo extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String clase;
 
-    @Column(length = 250)
+    @Column(length = 20)
     private String tipo;
 
-    @Column(length = 20)
+    @Column(length = 4)
     private String anio;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false, length = 20)
     private String estado;
 
     @Column(length = 100)

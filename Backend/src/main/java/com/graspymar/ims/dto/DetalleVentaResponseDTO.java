@@ -16,7 +16,7 @@ public class DetalleVentaResponseDTO {
 
     private String nombreProducto;
 
-    private Integer cantidad;
+    private BigDecimal cantidad;
 
     private BigDecimal precioUnitario;
 

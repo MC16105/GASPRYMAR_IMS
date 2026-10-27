@@ -17,6 +17,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -48,34 +49,29 @@ public class ControlEstanqueServiceImpl implements ControlEstanqueService {
         }
 
         for (DetalleControlEstanqueRequestDTO detalleDTO : dto.getDetalles()) {
-
             Insumo insumo = insumoRepository.findById(detalleDTO.getInsumoId())
-                    .orElseThrow(() ->
-                            new EntityNotFoundException("Insumo no encontrado."));
-
-            if (insumo.getStockActual() < detalleDTO.getCantidad()) {
+                    .orElseThrow(() -> new EntityNotFoundException("Insumo no encontrado."));
+            // Convertir Integer a BigDecimal
+            BigDecimal cantidad = BigDecimal.valueOf(detalleDTO.getCantidad());
+            // Verificar existencias
+            if (insumo.getStockActual().compareTo(cantidad) < 0) {
                 throw new IllegalArgumentException(
                         "Stock insuficiente para el insumo: "
-                                + insumo.getNombre());
+                                + insumo.getNombre()
+                );
             }
-
-            insumo.setStockActual(
-                    insumo.getStockActual() - detalleDTO.getCantidad()
-            );
-
+            // Descontar existencias
+            insumo.setStockActual(insumo.getStockActual().subtract(cantidad));
             insumoRepository.save(insumo);
-
+            // Crear detalle
             DetalleControlEstanque detalle = DetalleControlEstanque.builder()
                     .controlEstanque(control)
                     .insumo(insumo)
                     .cantidad(detalleDTO.getCantidad())
                     .build();
-
             control.getDetalles().add(detalle);
         }
-
         ControlEstanque guardado = controlEstanqueRepository.save(control);
-
         return toResponse(guardado);
     }
 

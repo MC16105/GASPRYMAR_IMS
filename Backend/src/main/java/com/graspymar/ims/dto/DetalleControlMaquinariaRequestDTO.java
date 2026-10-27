@@ -11,11 +11,12 @@ import lombok.*;
 @Builder
 public class DetalleControlMaquinariaRequestDTO {
 
-    @NotNull
+    @NotNull(message = "El insumo es obligatorio")
+    @Positive(message = "El insumo seleccionado no es válido")
     private Long insumoId;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "La cantidad es obligatoria")
+    @Positive(message = "La cantidad debe ser mayor a cero")
     private Integer cantidad;
 
 }

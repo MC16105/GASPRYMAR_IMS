@@ -50,8 +50,12 @@ public class CompraServiceImpl implements CompraService {
                     .orElseThrow(() ->
                             new EntityNotFoundException("Insumo no encontrado."));
 
+            // Integer -> BigDecimal
+            BigDecimal cantidad = BigDecimal.valueOf(detalleDTO.getCantidad());
+
+            // Calcular subtotal
             BigDecimal subtotal = detalleDTO.getPrecioUnitario()
-                    .multiply(BigDecimal.valueOf(detalleDTO.getCantidad()));
+                    .multiply(cantidad);
 
             DetalleCompra detalle = DetalleCompra.builder()
                     .compra(compra)
@@ -65,9 +69,9 @@ public class CompraServiceImpl implements CompraService {
 
             total = total.add(subtotal);
 
-            // Actualizar stock del insumo
+            // Sumar existencias
             insumo.setStockActual(
-                    insumo.getStockActual() + detalleDTO.getCantidad()
+                    insumo.getStockActual().add(cantidad)
             );
         }
 

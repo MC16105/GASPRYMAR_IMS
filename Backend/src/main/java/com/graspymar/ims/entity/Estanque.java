@@ -33,5 +33,4 @@ public class Estanque extends BaseEntity {
     @Column(nullable = false)
     private EstadoEstanque estado;
 
-
 }

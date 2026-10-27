@@ -25,38 +25,43 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioResponse crearUsuario(UsuarioRequest request) {
 
+        if (request.getPassword() == null ||
+                request.getPassword().isBlank() ||
+                request.getPassword().length() < 8) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "La contraseña debe tener al menos 8 caracteres"
+            );
+        }
         if (usuarioRepository.existsByUsername(request.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "El username ya existe"); }
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "El username ya existe"
+            );
+        }
 
         if (usuarioRepository.existsByCorreo(request.getCorreo())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "El correo ya existe"); }
 
         Rol rol = rolRepository.findById(request.getRolId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rol no encontrado"));
-
         Usuario usuario = new Usuario();
-
         usuario.setUsername(request.getUsername());
         usuario.setPassword(passwordEncoder.encode(request.getPassword())); // Después será BCrypt
         usuario.setNombreCompleto(request.getNombreCompleto());
         usuario.setCorreo(request.getCorreo());
         usuario.setRol(rol);
-
         usuario = usuarioRepository.save(usuario);
-
         UsuarioResponse response = new UsuarioResponse();
-
         response.setId(usuario.getId());
         response.setUsername(usuario.getUsername());
         response.setNombreCompleto(usuario.getNombreCompleto());
         response.setCorreo(usuario.getCorreo());
         response.setRol(usuario.getRol().getNombre().name());
-
         return response;
     } 
 
     @Override
     public List<UsuarioResponse> listarUsuarios() {
-
     return usuarioRepository.findAll().stream().map(usuario -> {
                 UsuarioResponse response = new UsuarioResponse();
                 response.setId(usuario.getId());
@@ -100,10 +105,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     usuario.setNombreCompleto(request.getNombreCompleto());
     usuario.setCorreo(request.getCorreo());
 
-    if (request.getPassword() != null &&
-            !request.getPassword().isBlank()) {
-        usuario.setPassword(passwordEncoder.encode(request.getPassword()));
-    }
+        if (request.getPassword() != null &&
+                !request.getPassword().isBlank()) {
+            if (request.getPassword().length() < 8) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "La nueva contraseña debe tener al menos 8 caracteres"
+                );
+            }
+            usuario.setPassword(
+                    passwordEncoder.encode(request.getPassword())
+            );
+        }
 
     usuario.setRol(rol);
     usuarioRepository.save(usuario);

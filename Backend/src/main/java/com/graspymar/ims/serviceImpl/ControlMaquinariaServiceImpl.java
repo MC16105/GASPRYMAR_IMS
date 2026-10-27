@@ -16,6 +16,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -44,10 +46,12 @@ public class ControlMaquinariaServiceImpl implements ControlMaquinariaService {
         for (DetalleControlMaquinariaRequestDTO detalleDTO : dto.getDetalles()) {
             Insumo insumo = insumoRepository.findById(detalleDTO.getInsumoId())
                     .orElseThrow(() -> new EntityNotFoundException("Insumo no encontrado."));
-            if (insumo.getStockActual() < detalleDTO.getCantidad()) {
-                throw new IllegalArgumentException("Stock insuficiente para el insumo: "+ insumo.getNombre());
+            if (insumo.getStockActual().compareTo(
+                    BigDecimal.valueOf(detalleDTO.getCantidad())
+            ) < 0) {
+                throw new IllegalArgumentException("Stock insuficiente para el insumo: " + insumo.getNombre());
             }
-            insumo.setStockActual(insumo.getStockActual() - detalleDTO.getCantidad());
+            insumo.setStockActual(insumo.getStockActual().subtract(BigDecimal.valueOf(detalleDTO.getCantidad())));
             insumoRepository.save(insumo);
             DetalleControlMaquinaria detalle = DetalleControlMaquinaria.builder()
                     .controlMaquinaria(control)

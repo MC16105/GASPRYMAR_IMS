@@ -17,9 +17,9 @@ public class InsumoResponseDTO {
 
     private String unidadMedida;
 
-    private Integer stockActual;
+    private BigDecimal stockActual;
 
-    private Integer stockMinimo;
+    private BigDecimal stockMinimo;
 
     private BigDecimal precioReferencia;
 

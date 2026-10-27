@@ -42,9 +42,9 @@ public class CargaCombustible extends BaseEntity {
     @Column(nullable = false, length = 30)
     private String tipoCombustible;
 
-    @Column(length = 50)
+    @Column(nullable = false, length = 50)
     private String numeroFactura;
 
-    @Column(length = 250)
+    @Column(nullable = false, length = 250)
     private String observaciones;
 }

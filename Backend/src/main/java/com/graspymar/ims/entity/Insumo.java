@@ -21,10 +21,10 @@ public class Insumo extends BaseEntity {
     private String unidadMedida;
 
     @Column(nullable = false)
-    private Integer stockActual;
+    private BigDecimal stockActual;
 
     @Column(nullable = false)
-    private Integer stockMinimo;
+    private BigDecimal stockMinimo;
 
     @Column(nullable = false)
     private BigDecimal precioReferencia;
